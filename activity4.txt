@@ -1,0 +1,97 @@
+//Code for Virtual Library BOOKSPACE
+
+#include <stdio.h>
+#include <string.h>
+#define MAX_NAME 100      //Max length of user's name
+#define MAX_GENRES 7      //Maximum number of genres
+#define MAX_BOOK_NAME 100 //Maximum length for book name
+#define MAX_LENGTH 100    //Max length for string operations
+
+//Display different genres to the user
+void displayGenres(){
+    printf("Different genres of books available in the library:\n");
+    printf("1. Academics\n");
+    printf("2. Science Fiction\n");
+    printf("3. Fantasy\n");
+    printf("4. Rom-Com\n");
+    printf("5. Mystery\n");
+    printf("6. Poetry\n");
+    printf("7. Motivational\n");
+}
+int main(){
+    //Declaration part
+    int n, choice;
+    char name[MAX_NAME];
+    char bookName[MAX_BOOK_NAME];
+    char title[MAX_BOOK_NAME];
+    char issuedate[11];
+    char duedate[11];
+    char combineddates[MAX_LENGTH];
+  
+    printf("Hello! Welcome to BOOKSPACE!\n");
+    printf("Enter your full name:\n");
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = 0; 
+    printf("Enter the number of books you want to read:\n");
+    scanf("%d", &n);
+    getchar(); 
+    //Display genres
+    displayGenres();
+    for(int i = 0; i < n; i++){
+        printf("SELECT THE GENRE OF YOUR BOOK (1-7): ");
+        scanf("%d", &choice);
+        getchar();
+      
+        switch (choice){
+            case 1:
+                printf("Enter the book name to be added in ACADEMICS:\n");
+                break;
+            case 2:
+                printf("Enter the book name to be added in SCIENCE FICTION:\n");
+                break;
+            case 3:
+                printf("Enter the book name to be added in FANTASY:\n");
+                break;
+            case 4:
+                printf("Enter the book name to be added in ROM-COM:\n");
+                break;
+            case 5:
+                printf("Enter the book name to be added in MYSTERY:\n");
+                break;
+            case 6:
+                printf("Enter the book name to be added in POETRY:\n");
+                break;
+            case 7:
+                printf("Enter the book name to be added in MOTIVATIONAL:\n");
+                break;
+            default:
+                printf("Invalid choice, try again...\n");
+                i--; //Decrease index to repeat this iteration
+                continue; //Go to the next iteration
+        }
+        //Get the book name
+        fgets(bookName, sizeof(bookName), stdin);
+        bookName[strcspn(bookName, "\n")] = 0;
+        strcpy(title, bookName); //Copy book name to title
+        printf("You selected the book '%s'\n", title);
+        //Display the length of the book name
+        size_t length = strlen(bookName);
+        printf("Length of the string is: %zu\n", length);
+    }
+    //Get issue and due dates
+    printf("Enter the date on which the book is issued (DD/MM/YYYY):\n");
+    scanf("%10s", issuedate);
+    getchar();
+    printf("Enter the date on which the book should be returned (DD/MM/YYYY):\n");
+    scanf("%10s", duedate);
+    getchar();
+    //Concatenate the issue and due dates
+    strcpy(combineddates, "Issue Date: ");
+    strcat(combineddates, issuedate);
+    strcat(combineddates, ", Due Date: ");
+    strcat(combineddates, duedate);
+    //Print the combined dates
+    printf("%s\n", combineddates);
+    printf("THANK YOU! VISIT AGAIN!\n");
+    return 0;
+}
